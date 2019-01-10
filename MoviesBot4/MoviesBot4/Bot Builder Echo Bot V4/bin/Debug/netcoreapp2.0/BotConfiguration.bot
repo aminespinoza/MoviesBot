@@ -1,0 +1,18 @@
+{
+    "name": "Bot_Builder_Echo_Bot_V4",
+    "description": "",
+  "services": [
+    {
+      "appId": "",
+      "appPassword": "",
+      "endpoint": "http://localhost:3978/api/messages",
+      "id": "24",
+      "name": "development",
+      "type": "endpoint"
+    }
+  ],
+    "padlock": "",
+    "version": "2.0",
+    "path": "C:\\Users\\amines\\source\\repos\\MoviesBot4\\MoviesBot4\\Bot Builder Echo Bot V4\\BotConfiguration.bot",
+    "overrides": null
+}
