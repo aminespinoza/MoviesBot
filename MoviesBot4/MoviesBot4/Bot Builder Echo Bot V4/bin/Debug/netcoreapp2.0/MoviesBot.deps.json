@@ -22,7 +22,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "Bot Builder Echo Bot V4/1.0.0": {
+      "MoviesBot/1.0.0": {
         "dependencies": {
           "AsyncUsageAnalyzers": "1.0.0-alpha003",
           "Microsoft.AspNetCore": "2.1.3",
@@ -39,10 +39,10 @@
           "StyleCop.Analyzers": "1.1.0-beta008"
         },
         "runtime": {
-          "Bot Builder Echo Bot V4.dll": {}
+          "MoviesBot.dll": {}
         },
         "compile": {
-          "Bot Builder Echo Bot V4.dll": {}
+          "MoviesBot.dll": {}
         }
       },
       "AsyncUsageAnalyzers/1.0.0-alpha003": {},
@@ -4805,7 +4805,7 @@
     }
   },
   "libraries": {
-    "Bot Builder Echo Bot V4/1.0.0": {
+    "MoviesBot/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Linq;
-using Bot_Builder_Echo_Bot_V4.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Integration;
 using Microsoft.Bot.Builder.Integration.AspNet.Core;
-using Microsoft.Bot.Configuration;
-using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MoviesBot.Models;
+using System;
+using System.Linq;
 
-namespace Bot_Builder_Echo_Bot_V4
+namespace MoviesBot
 {
     public class Startup
     {
@@ -37,26 +35,23 @@ namespace Bot_Builder_Echo_Bot_V4
 
         public void ConfigureServices(IServiceCollection services)
         {
-            Settings.MicrosoftAppId = Configuration.GetSection("MicrosoftAppId")?.Value;
-            Settings.MicrosoftAppPassword = Configuration.GetSection("MicrosoftAppPassword")?.Value;
-            Settings.SelectedLanguage = Configuration.GetSection("SelectedLanguage")?.Value;
-
             IStorage storage = new MemoryStorage();
 
-            services.AddBot<EchoWithCounterBot>(options =>
+            services.AddBot<MoviesBot>(options =>
             {
                 options.State.Add(new UserState(storage));
                 options.State.Add(new ConversationState(storage));
 
-                options.CredentialProvider = new SimpleCredentialProvider(Settings.MicrosoftAppId, Settings.MicrosoftAppPassword);
-
+                // options.CredentialProvider = new SimpleCredentialProvider(Settings.MicrosoftAppId, Settings.MicrosoftAppPassword);
                 // The BotStateSet middleware forces state storage to auto-save when the bot is complete processing the message.
                 // Note: Developers may choose not to add all the state providers to this middleware if save is not required.
                 options.Middleware.Add(new AutoSaveStateMiddleware(options.State.ToArray()));
                 options.Middleware.Add(new ShowTypingMiddleware());
             });
 
-            services.AddSingleton<EchoBotAccessors>(sp =>
+            ConversationState conversationState = new ConversationState(storage);
+
+            services.AddSingleton<MoviesBotAccessors>(sp =>
             {
                 // We need to grab the conversationState we added on the options in the previous step
                 var options = sp.GetRequiredService<IOptions<BotFrameworkOptions>>().Value;
@@ -65,7 +60,7 @@ namespace Bot_Builder_Echo_Bot_V4
                     throw new InvalidOperationException("BotFrameworkOptions must be configured prior to setting up the State Accessors");
                 }
 
-                var conversationState = options.State.OfType<ConversationState>().FirstOrDefault();
+                // var conversationState = options.State.OfType<ConversationState>().FirstOrDefault();
                 if (conversationState == null)
                 {
                     throw new InvalidOperationException("ConversationState must be defined and added before adding conversation-scoped state accessors.");
@@ -79,10 +74,10 @@ namespace Bot_Builder_Echo_Bot_V4
 
                 // Create the custom state accessor.
                 // State accessors enable other components to read and write individual properties of state.
-                var accessors = new EchoBotAccessors(conversationState, userState)
+                var accessors = new MoviesBotAccessors(conversationState, userState)
                 {
                     ConversationDialogState = conversationState.CreateProperty<DialogState>("DialogState"),
-                    SelectedLanguagePreference = userState.CreateProperty<string>("SelectedLanguagePreference"),
+                    UserProfileAccesor = userState.CreateProperty<UserProfile>(MoviesBotAccessors.UserProfileName),
                 };
 
                 return accessors;

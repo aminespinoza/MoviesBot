@@ -1,19 +1,17 @@
-﻿using Bot_Builder_Echo_Bot_V4.Models;
-using Newtonsoft.Json;
-using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using MoviesBot.Models;
+using Newtonsoft.Json;
+using RestSharp;
 
-namespace Bot_Builder_Echo_Bot_V4.Helpers
+namespace MoviesBot.Helpers
 {
     public class TranslatorHelper
     {
-        public static async Task<string> GetDesiredLanguageAsync(string content)
+        public static string GetDesiredLanguage(string content)
         {
             string requestBody = string.Format("[{{ \"Text\": \"{0}\" }}]", content);
 
@@ -32,19 +30,18 @@ namespace Bot_Builder_Echo_Bot_V4.Helpers
             return detectedLanguage;
         }
 
-        public static async Task<string> TranslateSentenceAsync(string originalSentence)
+        public static async Task<string> TranslateSentenceAsync(string originalSentence, string userLanguage)
         {
             string decodedString = WebUtility.HtmlDecode(originalSentence);
-            Object[] body = new Object[] { new { Text = decodedString } };
+            object[] body = new object[] { new { Text = decodedString } };
             var requestBody = JsonConvert.SerializeObject(body);
             string convertedAnswer = string.Empty;
-            //string languageCode = ConfigurationManager.AppSettings["DesiredLanguage"].ToString();
 
             using (var client = new HttpClient())
             using (var request = new HttpRequestMessage())
             {
                 request.Method = HttpMethod.Post;
-                request.RequestUri = new Uri(string.Format("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={0}", "en"));
+                request.RequestUri = new Uri(string.Format("https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={0}", userLanguage));
                 request.Content = new StringContent(requestBody, Encoding.UTF8, "application/json");
                 request.Headers.Add("Ocp-Apim-Subscription-Key", "eeca801f6c6e4f2eaf5d3204f029f2b5");
 
@@ -54,9 +51,9 @@ namespace Bot_Builder_Echo_Bot_V4.Helpers
             }
 
             string createdBody = "{ \"documents\": [ { \"result\": " + convertedAnswer + "} ] }";
-            //var message = JsonConvert.DeserializeObject<TranslationModel>(createdBody).documents[0].result[0].translations[0].text;
+            var message = JsonConvert.DeserializeObject<TranslationModel>(createdBody).documents[0].result[0].translations[0].text;
 
-            return null;
+            return message;
         }
     }
 }

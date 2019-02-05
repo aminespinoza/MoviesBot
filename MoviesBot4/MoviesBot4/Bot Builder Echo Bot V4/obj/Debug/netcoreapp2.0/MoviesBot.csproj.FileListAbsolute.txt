@@ -1,0 +1,12 @@
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\bin\Debug\netcoreapp2.0\BotConfiguration.bot
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\bin\Debug\netcoreapp2.0\MoviesBot.deps.json
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\bin\Debug\netcoreapp2.0\MoviesBot.runtimeconfig.json
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\bin\Debug\netcoreapp2.0\MoviesBot.runtimeconfig.dev.json
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\bin\Debug\netcoreapp2.0\MoviesBot.dll
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\bin\Debug\netcoreapp2.0\MoviesBot.pdb
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\obj\Debug\netcoreapp2.0\MoviesBot.csprojAssemblyReference.cache
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\obj\Debug\netcoreapp2.0\MoviesBot.csproj.CoreCompileInputs.cache
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\obj\Debug\netcoreapp2.0\MoviesBot.AssemblyInfoInputs.cache
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\obj\Debug\netcoreapp2.0\MoviesBot.AssemblyInfo.cs
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\obj\Debug\netcoreapp2.0\MoviesBot.dll
+C:\Users\amines\source\repos\MoviesBot4\MoviesBot4\Bot Builder Echo Bot V4\obj\Debug\netcoreapp2.0\MoviesBot.pdb
